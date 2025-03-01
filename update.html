@@ -1,0 +1,22 @@
+{% extends 'book_entry/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <button class="btn btn-primary" onclick="location.href='{% url 'list' %}'">Home</button>
+    <h1>Update Book</h1>
+
+    {% if messages %}
+        <div class="alert alert-success">
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+        {% crispy form %}
+        <br>
+        <button type="submit" class="btn btn-primary">Update Book</button>
+    </form>
+{% endblock %}

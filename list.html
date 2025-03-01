@@ -1,0 +1,42 @@
+{% extends 'book_entry/base.html' %}
+
+{% block content %}
+    <button class="btn btn-primary" onclick="location.href='{% url 'add' %}'">Add New Book</button>
+    <h1>Book List</h1>
+    {% if messages %}
+        <div class="alert alert-success">
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Author</th>
+                <th scope="col">ISBN</th>
+                <th scope="col">Publication Date</th>
+                <th scope="col">Price</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in books %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ book.title }}</td>
+                    <td>{{ book.author }}</td>
+                    <td>{{ book.isbn }}</td>
+                    <td>{{ book.publication_date }}</td>
+                    <td>{{ book.price }}</td>
+                    <td>
+                        <a href="{% url 'update' book.pk %}">Update</a> | 
+                        <a href="{% url 'delete' book.pk %}">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
